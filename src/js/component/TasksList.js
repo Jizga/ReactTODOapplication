@@ -15,6 +15,7 @@ export function TaskList() {
 	]);
 
 	function addNewTask(task) {
+		//'new Date()' para hacer el id único
 		setList([...list, { id: new Date(), text: task }]);
 	}
 
@@ -27,7 +28,9 @@ export function TaskList() {
 	}
 
 	function deleteTask(idTask) {
-		console.log("TAREA BORRADA", idTask);
+		const newList = list.filter(task => task.id !== idTask);
+
+		setList(newList);
 	}
 
 	return (

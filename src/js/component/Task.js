@@ -26,5 +26,6 @@ export function Task(props) {
 Task.propTypes = {
 	taskText: PropTypes.string,
 	deleteTask: PropTypes.func,
-	id: PropTypes.date
+	//Mis ids son de dos tipos, los de la lista de inicio son números y el resto son fechas (Object Date)
+	id: PropTypes.oneOfType([PropTypes.number, PropTypes.object])
 };
