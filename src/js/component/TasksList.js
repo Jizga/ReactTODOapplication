@@ -29,19 +29,27 @@ export function TaskList() {
 
 	function deleteTask(idTask) {
 		const newList = list.filter(task => task.id !== idTask);
-
 		setList(newList);
 	}
 
 	return (
 		<div className="container text-center mt-5 myListContainer">
-			<div className="row d-flex flex-column">
-				<h1 className="col-6 col-sm-7 col-md-7 col-lg-9 col-xl-9 mb-3">
+			<div className="row d-flex flex-column myListRow">
+				<div className="d-flex">
+					<div className="hole"></div>
+					<div className="hole ml-2"></div>
+				</div>
+				<div className="d-flex justify-content-end">
+					<div className="hole"></div>
+					<div className="hole ml-2 mr-4"></div>
+				</div>
+				<h1 className="col-6 col-sm-7 col-md-7 col-lg-9 col-xl-9 mb-3 mt-2 text-white">
 					TODO App
 				</h1>
-				<div className="row mb-3">
+
+				<div className="row mb-4">
 					<input
-						className="col-6 col-sm-7 col-md-7 col-lg-10 col-xl-10"
+						className="col-6 col-sm-7 col-md-7 col-lg-10 col-xl-10 border-0 rounded-pill text-center"
 						type="text"
 						//Recoger el valor del input y añadirlo a la lista
 						onChange={e => setInputTast(e.target.value)}
@@ -49,8 +57,10 @@ export function TaskList() {
 						//Añadir la nueva tarea pulsando "Enter"
 						onKeyPress={e => pressEnter(e)}
 						placeholder="No tasks, add a task"
+						autoFocus
 					/>
 				</div>
+
 				<div>
 					{list.map(task => {
 						return (
@@ -62,6 +72,10 @@ export function TaskList() {
 							/>
 						);
 					})}
+				</div>
+
+				<div className="d-flex justify-content-start">
+					<div className="taskLeft">{list.length} task left</div>
 				</div>
 			</div>
 		</div>

@@ -6,7 +6,7 @@ export function Task(props) {
 		<div className="row">
 			{/* Asegurarse de que la tarea no esté vacía */}
 			{props.taskText.trim() !== "" ? (
-				<div className="col-5 col-sm-6 col-md-6 col-lg-8 col-xl-8">
+				<div className="col-5 col-sm-6 col-md-6 col-lg-8 col-xl-8 text-white">
 					{props.taskText}
 					<hr></hr>
 				</div>
@@ -26,6 +26,6 @@ export function Task(props) {
 Task.propTypes = {
 	taskText: PropTypes.string,
 	deleteTask: PropTypes.func,
-	//Mis ids son de dos tipos, los de la lista de inicio son números y el resto son fechas (Object Date)
+	//Mis ids son de dos tipos, los de la lista de inicio son números y el resto son fechas (Date Object)
 	id: PropTypes.oneOfType([PropTypes.number, PropTypes.object])
 };
