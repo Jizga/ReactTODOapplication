@@ -26,6 +26,10 @@ export function TaskList() {
 		}
 	}
 
+	function deleteTask(idTask) {
+		console.log("TAREA BORRADA", idTask);
+	}
+
 	return (
 		<div className="container text-center mt-5 myListContainer">
 			<div className="row d-flex flex-column">
@@ -46,7 +50,14 @@ export function TaskList() {
 				</div>
 				<div>
 					{list.map(task => {
-						return <Task key={task.id} taskText={task.text} />;
+						return (
+							<Task
+								key={task.id}
+								id={task.id}
+								taskText={task.text}
+								deleteTask={deleteTask}
+							/>
+						);
 					})}
 				</div>
 			</div>

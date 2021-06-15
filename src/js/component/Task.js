@@ -13,7 +13,9 @@ export function Task(props) {
 			) : null}
 			{props.taskText.trim() !== "" ? (
 				<div className="col-1 col-sm-1 col-md-1 col-lg-2 col-xl-2">
-					<i className="far fa-trash-alt"></i>
+					<i
+						className="far fa-trash-alt"
+						onClick={() => props.deleteTask(props.id)}></i>
 					<hr></hr>
 				</div>
 			) : null}
@@ -22,5 +24,7 @@ export function Task(props) {
 }
 
 Task.propTypes = {
-	taskText: PropTypes.string
+	taskText: PropTypes.string,
+	deleteTask: PropTypes.func,
+	id: PropTypes.date
 };
