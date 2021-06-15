@@ -13,16 +13,7 @@ export function TaskList() {
 			id: 2,
 			text: "Learn Python"
 		}
-		// {
-		// 	id: new Date().getMilliseconds(),
-		// 	text: newTask
-		// }
 	];
-
-	// let list = tasks.map(t => {
-	// 	console.log("task ", t, typeof t);
-	// 	return <Task key={t.id} taskText={t.text} />;
-	// });
 
 	let addNewTask = [
 		...tasks,
@@ -38,7 +29,7 @@ export function TaskList() {
 		<div className="container text-center mt-5 myListContainer">
 			<div className="row d-flex flex-column">
 				<h1 className="col-6 col-sm-7 col-md-7 col-lg-9 col-xl-9 mb-3">
-					TO DO App
+					TODO App
 				</h1>
 				<div className="row mb-3">
 					<input
