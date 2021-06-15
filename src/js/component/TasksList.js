@@ -2,9 +2,8 @@ import React, { useState } from "react";
 import { Task } from "./Task";
 
 export function TaskList() {
-	const [newTask, setNewTask] = useState("");
-
-	const tasks = [
+	const [inputTast, setInputTast] = useState("");
+	const [list, setList] = useState([
 		{
 			id: 1,
 			text: "Learn React"
@@ -13,17 +12,19 @@ export function TaskList() {
 			id: 2,
 			text: "Learn Python"
 		}
-	];
+	]);
 
-	let addNewTask = [
-		...tasks,
-		{ id: new Date().getMilliseconds(), text: newTask }
-	];
+	function addNewTask(task) {
+		setList([...list, { id: new Date(), text: task }]);
+	}
 
-	let list = addNewTask.map(t => {
-		console.log("task ", t, typeof t);
-		return <Task key={t.id} taskText={t.text} />;
-	});
+	//Añadir la nueva tarea pulsando "Enter"
+	function pressEnter(e) {
+		if (e.key === "Enter") {
+			addNewTask(inputTast);
+			setInputTast("");
+		}
+	}
 
 	return (
 		<div className="container text-center mt-5 myListContainer">
@@ -35,12 +36,19 @@ export function TaskList() {
 					<input
 						className="col-6 col-sm-7 col-md-7 col-lg-10 col-xl-10"
 						type="text"
-						onChange={e => setNewTask(e.target.value)}
-						value={newTask}
+						//Recoger el valor del input y añadirlo a la lista
+						onChange={e => setInputTast(e.target.value)}
+						value={inputTast}
+						//Añadir la nueva tarea pulsando "Enter"
+						onKeyPress={e => pressEnter(e)}
 						placeholder="No tasks, add a task"
 					/>
 				</div>
-				<div>{list}</div>
+				<div>
+					{list.map(task => {
+						return <Task key={task.id} taskText={task.text} />;
+					})}
+				</div>
 			</div>
 		</div>
 	);
