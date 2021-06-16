@@ -17,15 +17,19 @@ export function TaskList() {
 	const [taskDone, setTaskDone] = useState([]);
 
 	function addNewTask(task) {
-		//'new Date()' para hacer el id único
-		setList([...list, { id: new Date(), text: task }]);
+		if (inputTast.trim() !== "") {
+			//'new Date()' para hacer el id único
+			setList([...list, { id: new Date(), text: task }]);
+		}
 	}
 
 	//Añadir la nueva tarea pulsando "Enter"
 	function pressEnter(e) {
-		if (e.key === "Enter") {
-			addNewTask(inputTast);
-			setInputTast("");
+		if (inputTast.trim() !== "") {
+			if (e.key === "Enter") {
+				addNewTask(inputTast);
+				setInputTast("");
+			}
 		}
 	}
 
@@ -34,7 +38,7 @@ export function TaskList() {
 		setList(newList);
 	}
 
-	//No tacha la tarea seleccionada
+	//Tareas hechas
 	function addTaskDone(idTaskDone) {
 		list.filter(task => {
 			if (task.id === idTaskDone) {
