@@ -52,6 +52,10 @@ hr{
     color: rgba(6, 33, 124, 0.89);
 }
 
+.taskDone{
+    text-decoration: line-through;
+}
+
 .fa-trash-alt{
     color: rgba(247, 9, 9, 0.445);
     cursor: pointer;

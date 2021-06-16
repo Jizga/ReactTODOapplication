@@ -14,7 +14,7 @@ export function TaskList() {
 		}
 	]);
 
-	// const [taskDone, setTaskDone] = useState([]);
+	const [taskDone, setTaskDone] = useState([]);
 
 	function addNewTask(task) {
 		//'new Date()' para hacer el id único
@@ -36,21 +36,30 @@ export function TaskList() {
 
 	//No tacha la tarea seleccionada
 	function addTaskDone(idTaskDone) {
-		return list.filter(task => {
+		list.filter(task => {
 			if (task.id === idTaskDone) {
-				console.log("Texto -- ", task.text);
-				<del>{task.text}</del>;
+				setTaskDone([...taskDone, task]);
 			}
 		});
 
+		// ======================================= SIN USAR ESTADOS PARA LAS TAREAS HECHAS ======================
+		//**** Intenta hacer el tachado directamente con un tag de boostrap */
+		//
+		// let taskDone = list.filter(task => {
+		// 	if (task.id === idTaskDone) {
+		// 		console.log("Texto -- ", task.text);
+		// 		<del>{task.text}</del>;
+		// 	}
+		// });
+
+		//**** Intenta hacer el tachado usando el DOM de JS (Sólo tacha el primer elemento de la lista)*/
+		//
 		// if (taskDone[0]) {
 		// 	console.log("Texto -- ", taskDone[0].text);
 
 		// 	document.querySelector(".myTask").style.textDecorationLine =
 		// 		"line-through";
 		// }
-
-		// setTaskDone(taskDone.push(taskDone));
 	}
 
 	return (
@@ -90,7 +99,12 @@ export function TaskList() {
 								id={task.id}
 								taskText={task.text}
 								deleteTask={deleteTask}
+								//Seleccionar las tareas hechas
 								addTaskDone={addTaskDone}
+								//para hacer que el componente hijo tache las tareas hechas
+								taskDone={taskDone}
+								// //*** Intento de Tachar las tareas hechas haciendo la función de tachado en Task */
+								// list={list}
 							/>
 						);
 					})}
