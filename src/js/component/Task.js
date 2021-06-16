@@ -2,9 +2,10 @@ import React from "react";
 import PropTypes from "prop-types";
 
 export function Task(props) {
+	// //*** 3º método: tachar la tarea hecha SIN props */
+	//
 	// console.log("Lista PROPS", props.list);
-
-	// //*** Intento de tachar la tarea hecha SIN props */
+	//
 	// function taskDone(idTaskDone) {
 	// 	console.log("id de la tarea hecha", idTaskDone);
 	// 	return props.list.filter(task => {
@@ -22,9 +23,10 @@ export function Task(props) {
 			{/* Asegurarse de que la tarea no esté vacía */}
 			{props.taskText.trim() !== "" ? (
 				<div className="col-5 col-sm-6 col-md-6 col-lg-8 col-xl-8 myTask">
-					{/* {props.taskText} */}
+					{props.taskText}
 
-					{props.taskDone.length > 0 ? (
+					{/* 2º Intento del 2º método -->> === En este intento tachaba todas las tareas ===*/}
+					{/* {props.taskDone.id === props.id ? (
 						// <p style={{ textDecoration: "line - through" }}>
 						<p className="taskDone">
 							{console.log("Tarea hecha: ", props.taskDone)}
@@ -32,12 +34,27 @@ export function Task(props) {
 						</p>
 					) : (
 						<p>{props.taskText}</p>
-					)}
+					)} */}
 					<hr></hr>
 				</div>
 			) : null}
 
+			{/* **** 3º Intento del 2º métdo (estado de taskDone)  ===>> CREO QUE EL EJOR HASTA AHORA */}
+			{props.taskDone.map(t => {
+				if (t.id == props.id) {
+					<p key={t.id} className="taskDone">
+						{console.log("Tarea hecha: ", props.taskDone)}
+						{console.log("id tarea hecha -->> ", t.id)}
+						{console.log("props.id -- ", props.id)}
+						{props.taskText}
+					</p>;
+				} else {
+					<p key={t.id}>{props.taskText}</p>;
+				}
+			})}
+
 			{/* TACHAR LAS TAREAS HECHAS!! >--< */}
+			{/* 1º Intento del método 2º -->> === En este intento tachaba solo la primera tarea === */}
 			{/* {props.taskDone.length > 0 ? (
 				<div
 					className="col-5 col-sm-6 col-md-6 col-lg-8 col-xl-8 myTask"
@@ -58,7 +75,7 @@ export function Task(props) {
 							className="fas fa-check"
 							onClick={() => props.addTaskDone(props.id)}
 
-							// //*** Intento de tachar la tarea hecha SIN props */
+							// //*** 3º método: Intento de tachar la tarea hecha SIN props */
 							// onClick={() => taskDone(props.id)}
 						></i>
 					</div>
@@ -74,8 +91,11 @@ Task.propTypes = {
 	deleteTask: PropTypes.func,
 	//Mis ids son de dos tipos, los de la lista de inicio son números y el resto son fechas (Date Object)
 	id: PropTypes.oneOfType([PropTypes.number, PropTypes.object]),
+
+	//** 2º método:
 	addTaskDone: PropTypes.func,
 	taskDone: PropTypes.array
-	// //*** Intento de tachar la tarea hecha SIN props */
+
+	// //*** 3º método: Intento de tachar la tarea hecha SIN props */
 	// list: PropTypes.array
 };
