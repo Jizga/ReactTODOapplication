@@ -14,6 +14,8 @@ export function TaskList() {
 		}
 	]);
 
+	// const [taskDone, setTaskDone] = useState([]);
+
 	function addNewTask(task) {
 		//'new Date()' para hacer el id único
 		setList([...list, { id: new Date(), text: task }]);
@@ -30,6 +32,25 @@ export function TaskList() {
 	function deleteTask(idTask) {
 		const newList = list.filter(task => task.id !== idTask);
 		setList(newList);
+	}
+
+	//No tacha la tarea seleccionada
+	function addTaskDone(idTaskDone) {
+		return list.filter(task => {
+			if (task.id === idTaskDone) {
+				console.log("Texto -- ", task.text);
+				<del>{task.text}</del>;
+			}
+		});
+
+		// if (taskDone[0]) {
+		// 	console.log("Texto -- ", taskDone[0].text);
+
+		// 	document.querySelector(".myTask").style.textDecorationLine =
+		// 		"line-through";
+		// }
+
+		// setTaskDone(taskDone.push(taskDone));
 	}
 
 	return (
@@ -69,6 +90,7 @@ export function TaskList() {
 								id={task.id}
 								taskText={task.text}
 								deleteTask={deleteTask}
+								addTaskDone={addTaskDone}
 							/>
 						);
 					})}
