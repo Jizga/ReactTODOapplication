@@ -33,7 +33,7 @@ export function TaskList() {
 	}
 
 	return (
-		<div className="container text-center mt-5 myListContainer">
+		<div className="container text-center mt-5 mb-5 myListContainer">
 			<div className="row d-flex flex-column myListRow">
 				<div className="d-flex">
 					<div className="hole"></div>
@@ -43,7 +43,7 @@ export function TaskList() {
 					<div className="hole"></div>
 					<div className="hole ml-2 mr-4"></div>
 				</div>
-				<h1 className="col-6 col-sm-7 col-md-7 col-lg-9 col-xl-9 mb-3 mt-2 text-white">
+				<h1 className="col-6 col-sm-7 col-md-7 col-lg-9 col-xl-9 mb-3 mt-2">
 					TODO App
 				</h1>
 

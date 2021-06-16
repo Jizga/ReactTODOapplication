@@ -6,7 +6,7 @@ export function Task(props) {
 		<div className="row">
 			{/* Asegurarse de que la tarea no esté vacía */}
 			{props.taskText.trim() !== "" ? (
-				<div className="col-5 col-sm-6 col-md-6 col-lg-8 col-xl-8 text-white">
+				<div className="col-5 col-sm-6 col-md-6 col-lg-8 col-xl-8 myTask">
 					{props.taskText}
 					<hr></hr>
 				</div>

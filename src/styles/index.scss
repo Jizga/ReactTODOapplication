@@ -3,9 +3,7 @@
 
 
 body{
-    // background: black url('https://www.solofondos.com/wp-content/uploads/2015/12/Fondos-de-colores-neon.jpg');
-    background: black url('https://www.10wallpaper.com/wallpaper/1366x768/1306/Color_neon_waves-Black_Artistic_HD_Wallpaper_1366x768.jpg');
-    // background: black url('https://wallpapercave.com/wp/wp3331686.jpg');
+    background: black url('https://www.solofondos.com/wp-content/uploads/2015/12/Fondos-de-colores-neon.jpg');
 }
 
 .hole{
@@ -13,9 +11,6 @@ body{
     width: 2rem;
     margin: -1.5rem 0 0 -3rem;
     background-color: rgba(0, 0, 0, 0.884);
-    box-shadow: inset 2px 2px 3px rgb(204, 206, 113);
-    
-    z-index: 100;
 }
 
 .myListContainer{
@@ -25,33 +20,38 @@ body{
 .myListRow {
     padding: 2rem 0 2rem 5rem;
     border-radius: 20px;
-    background-color: rgba(221, 182, 9, 0.753);
-    box-shadow: 2px 2px 5px rgb(204, 206, 113);
+    background-color: rgba(239, 243, 6, 0.801);
 }
 
 h1{
     font-family: 'Monoton', cursive;
+     color: rgba(247, 9, 9, 0.445);
 }
 
 input{
     background-color: rgba(165, 160, 160, 0.288);
-     caret-color: rgb(229, 255, 0);
-     color: rgba(211, 208, 208, 0.815);
+    caret-color: rgb(229, 255, 0);
+    color: rgba(58, 56, 56, 0.685);
 }
 
 input:focus {
     outline: none !important;
     border:1px solid red;
-    box-shadow: 0 0 10px rgb(204, 206, 113);
+    box-shadow: 0 0 10px rgb(233, 235, 136);
 }
 
 ::placeholder, .taskLeft {
-    color: rgba(211, 208, 208, 0.815);
+    color: rgba(58, 56, 56, 0.685);
 }
 
 hr{
     background-color: rgba(18, 14, 241, 0.349);
 }
+
 .fa-trash-alt{
     color: rgba(247, 9, 9, 0.445);
+}
+
+.myTask{
+    color: rgba(6, 33, 124, 0.89);
 }
