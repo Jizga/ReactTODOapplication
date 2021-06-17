@@ -6,10 +6,11 @@ export function Task(props) {
 
 	return (
 		// "no-gutters" elimina el espacio entre columnas de boostrap
-		<div className="row no-gutters">
+
+		<div className="row no-gutters mt-2">
 			<div
 				className={
-					"col-5 col-sm-6 col-md-6 col-lg-8 col-xl-8 myTask " +
+					"col-7 col-sm-8 col-md-8 col-lg-10 col-xl-10 myTask " +
 					(isCrossOut ? "" : "taskDone")
 				}>
 				{props.taskText}
@@ -42,7 +43,6 @@ Task.propTypes = {
 	//Mis ids son de dos tipos, los de la lista de inicio son números y el resto son fechas (Date Object)
 	id: PropTypes.oneOfType([PropTypes.number, PropTypes.object]),
 
-	//** 2º método:
 	addTaskDone: PropTypes.func,
-	taskDone: PropTypes.array
+	taskDoneList: PropTypes.array
 };

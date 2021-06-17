@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { Task } from "./Task";
+import { TaskDone } from "./TaskDone";
 
 export function TaskList() {
 	const [inputTast, setInputTast] = useState("");
-	const [list, setList] = useState([
+	const [toDoList, setToDoList] = useState([
 		{
 			id: 1,
 			text: "Learn React"
@@ -14,12 +15,12 @@ export function TaskList() {
 		}
 	]);
 
-	const [taskDone, setTaskDone] = useState([]);
+	const [taskDoneList, setTaskDoneList] = useState([]);
 
 	function addNewTask(task) {
 		if (inputTast.trim() !== "") {
 			//'new Date()' para hacer el id único
-			setList([...list, { id: new Date(), text: task }]);
+			setToDoList([...toDoList, { id: new Date(), text: task }]);
 		}
 	}
 
@@ -34,17 +35,24 @@ export function TaskList() {
 	}
 
 	function deleteTask(idTask) {
-		const newList = list.filter(task => task.id !== idTask);
-		setList(newList);
+		const newtoDoList = toDoList.filter(task => task.id !== idTask);
+		setToDoList(newtoDoList);
 	}
 
 	//Tareas hechas
 	function addTaskDone(idTaskDone) {
-		list.filter(task => {
-			if (task.id === idTaskDone) {
-				setTaskDone([...taskDone, task]);
-			}
-		});
+		if (taskDoneList !== []) {
+			toDoList.filter(task => {
+				if (task.id === idTaskDone) {
+					setTaskDoneList([...taskDoneList, task]);
+
+					//Sacar las tareas hechas de la toDoLista de tareas
+					let indexTaskDone = toDoList.indexOf(task);
+					toDoList.splice(indexTaskDone, 1);
+					setToDoList(toDoList);
+				}
+			});
+		}
 	}
 
 	return (
@@ -76,25 +84,57 @@ export function TaskList() {
 					/>
 				</div>
 
-				<div>
-					{list.map(task => {
-						return (
-							<Task
-								key={task.id}
-								id={task.id}
-								taskText={task.text}
-								deleteTask={deleteTask}
-								//Seleccionar las tareas hechas
-								addTaskDone={addTaskDone}
-								//Para hacer que el componente hijo tache las tareas hechas
-								taskDone={taskDone}
-							/>
-						);
-					})}
-				</div>
+				<div className="d-flex col-8 col-sm-9 col-md-10 col-lg-10 col-xl-10">
+					<div className="row d-flex flex-column col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+						<h4 className="col-8 col-sm-9 col-md-9 col-lg-12 col-xl-12">
+							To do tasks
+						</h4>
+						{toDoList.map(task => {
+							return (
+								<Task
+									key={task.id}
+									id={task.id}
+									taskText={task.text}
+									deleteTask={deleteTask}
+									//Seleccionar las tareas hechas
+									addTaskDone={addTaskDone}
+									//Para hacer que el componente hijo tache las tareas hechas
+									taskDoneList={taskDoneList}
+								/>
+							);
+						})}
 
-				<div className="d-flex justify-content-start">
-					<div className="taskLeft">{list.length} task left</div>
+						<div className="d-flex justify-content-start">
+							<div className="taskLeft">
+								{toDoList.length} task left
+							</div>
+						</div>
+					</div>
+
+					<div className="row d-flex flex-column col-2 col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+						<h4 className="col-8 col-sm-9 col-md-9 col-lg-12 col-xl-12">
+							Done tasks
+						</h4>
+						{toDoList.map(task => {
+							return (
+								<TaskDone
+									key={task.id}
+									id={task.id}
+									deleteTask={deleteTask}
+									//Seleccionar las tareas hechas
+									addTaskDone={addTaskDone}
+									//Para hacer que el componente hijo tache las tareas hechas
+									taskDoneList={taskDoneList}
+								/>
+							);
+						})}
+
+						<div className="d-flex justify-content-start mt-1">
+							<div className="taskLeft">
+								{taskDoneList.length} task done
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
