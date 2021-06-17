@@ -6,11 +6,13 @@ export function TaskList() {
 	const [toDoList, setToDoList] = useState([
 		{
 			id: 1,
-			text: "Learn React"
+			text: "Learn React",
+			done: false
 		},
 		{
 			id: 2,
-			text: "Learn Python"
+			text: "Learn Python",
+			done: false
 		}
 	]);
 
@@ -43,15 +45,39 @@ export function TaskList() {
 		if (taskDoneList !== []) {
 			toDoList.filter(task => {
 				if (task.id === idTaskDone) {
+					task.done = true;
+
+					//Se mete en su lista (tareas hechas)
 					setTaskDoneList([...taskDoneList, task]);
 
 					//Sacar las tareas hechas de la toDoLista de tareas
 					let indexTaskDone = toDoList.indexOf(task);
 					toDoList.splice(indexTaskDone, 1);
+
+					//Actualizar la lista de tareas no hechas
 					setToDoList(toDoList);
 				}
 			});
 		}
+	}
+
+	//Devolver la tarea a tareas pendientes
+	function dontDone(idTask) {
+		taskDoneList.filter(task => {
+			if (task.id === idTask) {
+				task.done = false;
+
+				//Se mete en su lista de verdad, las no hechas
+				setToDoList([...toDoList, task]);
+
+				//Sacar la tarea que al final no se hizo de taskDoneList
+				let indexTask = toDoList.indexOf(task);
+				taskDoneList.splice(indexTask, 1);
+
+				//Actualizar la lista de tareas hechas
+				setTaskDoneList(taskDoneList);
+			}
+		});
 	}
 
 	return (
@@ -88,11 +114,11 @@ export function TaskList() {
 									key={task.id}
 									id={task.id}
 									taskText={task.text}
+									done={task.done}
 									deleteTask={deleteTask}
-									//Seleccionar las tareas hechas
 									addTaskDone={addTaskDone}
-									//Para hacer que el componente hijo tache las tareas hechas
 									taskDoneList={taskDoneList}
+									dontDone={dontDone}
 								/>
 							);
 						})}
@@ -114,11 +140,11 @@ export function TaskList() {
 									key={task.id}
 									id={task.id}
 									taskText={task.text}
+									done={task.done}
 									deleteTask={deleteTask}
-									//Seleccionar las tareas hechas
 									addTaskDone={addTaskDone}
-									//Para hacer que el componente hijo tache las tareas hechas
 									taskDoneList={taskDoneList}
+									dontDone={dontDone}
 								/>
 							);
 						})}
