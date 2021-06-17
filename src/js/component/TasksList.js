@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import { Task } from "./Task";
-import { TaskDone } from "./TaskDone";
 
 export function TaskList() {
-	const [inputTast, setInputTast] = useState("");
+	const [inputTask, setInputTask] = useState("");
 	const [toDoList, setToDoList] = useState([
 		{
 			id: 1,
@@ -18,7 +17,7 @@ export function TaskList() {
 	const [taskDoneList, setTaskDoneList] = useState([]);
 
 	function addNewTask(task) {
-		if (inputTast.trim() !== "") {
+		if (inputTask.trim() !== "") {
 			//'new Date()' para hacer el id único
 			setToDoList([...toDoList, { id: new Date(), text: task }]);
 		}
@@ -26,10 +25,10 @@ export function TaskList() {
 
 	//Añadir la nueva tarea pulsando "Enter"
 	function pressEnter(e) {
-		if (inputTast.trim() !== "") {
+		if (inputTask.trim() !== "") {
 			if (e.key === "Enter") {
-				addNewTask(inputTast);
-				setInputTast("");
+				addNewTask(inputTask);
+				setInputTask("");
 			}
 		}
 	}
@@ -56,27 +55,21 @@ export function TaskList() {
 	}
 
 	return (
-		<div className="container text-center mt-5 mb-5 myListContainer">
-			<div className="row d-flex flex-column myListRow">
-				<div className="d-flex">
-					<div className="hole"></div>
-					<div className="hole ml-2"></div>
+		<div className="container text-center mt-5 mb-5 pt-3 pb-5 d-flex justify-content-center rounded myListContainer">
+			<div className="p-0 m-0 myContainer">
+				<div className="row">
+					<h1 className="col-9 col-sm-10 col-md-10 col-lg-12 col-xl-12 mb-3 mt-2">
+						TODO App
+					</h1>
 				</div>
-				<div className="d-flex justify-content-end">
-					<div className="hole"></div>
-					<div className="hole ml-2 mr-4"></div>
-				</div>
-				<h1 className="col-6 col-sm-7 col-md-7 col-lg-9 col-xl-9 mb-3 mt-2">
-					TODO App
-				</h1>
 
 				<div className="row mb-4">
 					<input
-						className="col-6 col-sm-7 col-md-7 col-lg-10 col-xl-10 border-0 rounded-pill text-center"
+						className="col-9 col-sm-10 col-md-10 col-lg-12 col-xl-12 border-0 rounded-pill text-center"
 						type="text"
 						//Recoger el valor del input y añadirlo a la lista
-						onChange={e => setInputTast(e.target.value)}
-						value={inputTast}
+						onChange={e => setInputTask(e.target.value)}
+						value={inputTask}
 						//Añadir la nueva tarea pulsando "Enter"
 						onKeyPress={e => pressEnter(e)}
 						placeholder="No tasks, add a task"
@@ -84,9 +77,9 @@ export function TaskList() {
 					/>
 				</div>
 
-				<div className="d-flex col-8 col-sm-9 col-md-10 col-lg-10 col-xl-10">
-					<div className="row d-flex flex-column col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
-						<h4 className="col-8 col-sm-9 col-md-9 col-lg-12 col-xl-12">
+				<div className="row d-flex">
+					<div className="d-flex flex-column col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+						<h4 className="col-8 col-sm-9 col-md-9 col-lg-12 col-xl-12 taskTitle">
 							To do tasks
 						</h4>
 						{toDoList.map(task => {
@@ -111,15 +104,16 @@ export function TaskList() {
 						</div>
 					</div>
 
-					<div className="row d-flex flex-column col-2 col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
-						<h4 className="col-8 col-sm-9 col-md-9 col-lg-12 col-xl-12">
+					<div className="d-flex flex-column col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+						<h4 className="col-8 col-sm-9 col-md-9 col-lg-12 col-xl-12 taskTitle">
 							Done tasks
 						</h4>
-						{toDoList.map(task => {
+						{taskDoneList.map(task => {
 							return (
-								<TaskDone
+								<Task
 									key={task.id}
 									id={task.id}
+									taskText={task.text}
 									deleteTask={deleteTask}
 									//Seleccionar las tareas hechas
 									addTaskDone={addTaskDone}
@@ -137,6 +131,8 @@ export function TaskList() {
 					</div>
 				</div>
 			</div>
+
+			{/* </div> */}
 		</div>
 	);
 }

@@ -2,17 +2,11 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 
 export function Task(props) {
-	const [isCrossOut, setIsCrossOut] = useState(true);
-
 	return (
 		// "no-gutters" elimina el espacio entre columnas de boostrap
 
 		<div className="row no-gutters mt-2">
-			<div
-				className={
-					"col-7 col-sm-8 col-md-8 col-lg-10 col-xl-10 myTask " +
-					(isCrossOut ? "" : "taskDone")
-				}>
+			<div className="col-7 col-sm-8 col-md-8 col-lg-10 col-xl-10 myTask">
 				{props.taskText}
 
 				<hr></hr>
@@ -27,7 +21,6 @@ export function Task(props) {
 					<i
 						className="fas fa-check"
 						onClick={() => {
-							setIsCrossOut(false);
 							props.addTaskDone(props.id);
 						}}></i>
 				</div>
