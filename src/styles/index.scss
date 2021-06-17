@@ -9,7 +9,7 @@ body{
 .myListContainer{
     margin-top: 5rem!important;
     width: 42rem!important;
-    background-color: rgba(14, 14, 13, 0.849);
+    background-color: rgba(14, 14, 13, 0.911);
 }
 
 .myContainer{
@@ -34,8 +34,8 @@ input:focus {
     box-shadow: 0 0 10px rgb(233, 235, 136);
 }
 
-::placeholder, .taskLeft, .taskTitle{
-    color: rgba(221, 218, 218, 0.685);
+::placeholder, .taskNum, .taskTitle{
+    color: rgba(221, 218, 218, 0.562);
 }
 
 hr{

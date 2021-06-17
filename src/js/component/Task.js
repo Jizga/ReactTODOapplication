@@ -6,6 +6,7 @@ export function Task(props) {
 		// "no-gutters" elimina el espacio entre columnas de boostrap
 		<div className="row no-gutters mt-2">
 			{props.done === false ? (
+				//Tarea sin hacer
 				<>
 					<div className="col-7 col-sm-8 col-md-8 col-lg-10 col-xl-10 myTask">
 						{props.taskText}
@@ -16,7 +17,9 @@ export function Task(props) {
 						<div className="d-flex pt-2">
 							<i
 								className="far fa-trash-alt mr-4"
-								onClick={() => props.deleteTask(props.id)}></i>
+								onClick={() =>
+									props.deleteTask(props.id, null)
+								}></i>
 
 							<i
 								className="fas fa-check fa-lg"
@@ -28,6 +31,7 @@ export function Task(props) {
 					</div>
 				</>
 			) : (
+				// Tare Hecha
 				<>
 					<div className="col-7 col-sm-8 col-md-8 col-lg-10 col-xl-10 myTask">
 						{props.taskText}
@@ -38,7 +42,9 @@ export function Task(props) {
 						<div className="d-flex pt-2">
 							<i
 								className="far fa-trash-alt mr-4"
-								onClick={() => props.deleteTask(props.id)}></i>
+								onClick={() =>
+									props.deleteTask(null, props.id)
+								}></i>
 
 							<i
 								className="fas fa-times fa-lg"
@@ -57,8 +63,7 @@ export function Task(props) {
 Task.propTypes = {
 	taskText: PropTypes.string,
 	deleteTask: PropTypes.func,
-	//Mis ids son de dos tipos, los de la lista de inicio son números y el resto son fechas (Date Object)
-	id: PropTypes.oneOfType([PropTypes.number, PropTypes.object]),
+	id: PropTypes.number,
 	done: PropTypes.bool,
 	addTaskDone: PropTypes.func,
 	taskDoneList: PropTypes.array,

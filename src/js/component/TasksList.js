@@ -20,10 +20,10 @@ export function TaskList() {
 
 	function addNewTask(task) {
 		if (inputTask.trim() !== "") {
-			//'new Date()' para hacer el id único
 			setToDoList([
 				...toDoList,
-				{ id: new Date(), text: task, done: false }
+				//'Date.now()' para hacer el id único
+				{ id: Date.now(), text: task, done: false }
 			]);
 		}
 	}
@@ -38,9 +38,16 @@ export function TaskList() {
 		}
 	}
 
-	function deleteTask(idTask) {
-		const newtoDoList = toDoList.filter(task => task.id !== idTask);
-		setToDoList(newtoDoList);
+	function deleteTask(idTask, idTaskDone) {
+		if (idTask !== null) {
+			const newtoDoList = toDoList.filter(task => task.id !== idTask);
+			setToDoList(newtoDoList);
+		} else if (idTaskDone !== null) {
+			const newDoneList = taskDoneList.filter(
+				task => task.id !== idTaskDone
+			);
+			setTaskDoneList(newDoneList);
+		}
 	}
 
 	//Tareas hechas
@@ -75,7 +82,7 @@ export function TaskList() {
 					setToDoList([...toDoList, task]);
 
 					//Sacar la tarea que al final no se hizo de taskDoneList
-					let indexTask = toDoList.indexOf(task);
+					let indexTask = taskDoneList.indexOf(task);
 					taskDoneList.splice(indexTask, 1);
 
 					//Actualizar la lista de tareas hechas
@@ -88,13 +95,13 @@ export function TaskList() {
 	return (
 		<div className="container text-center mt-5 mb-5 pt-3 pb-5 d-flex justify-content-center rounded myListContainer">
 			<div className="p-0 m-0 myContainer">
-				<div className="row">
+				<div className="row d-flex justify-content-center">
 					<h1 className="col-9 col-sm-10 col-md-10 col-lg-12 col-xl-12 mb-3 mt-2">
 						TODO App
 					</h1>
 				</div>
 
-				<div className="row mb-4">
+				<div className="row mb-4 d-flex justify-content-center">
 					<input
 						className="col-9 col-sm-10 col-md-10 col-lg-12 col-xl-12 border-0 rounded-pill text-center"
 						type="text"
@@ -108,7 +115,7 @@ export function TaskList() {
 					/>
 				</div>
 
-				<div className="row d-flex">
+				<div className="row d-flex justify-content-center align-items-start">
 					<div className="d-flex flex-column col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
 						<h4 className="col-8 col-sm-9 col-md-9 col-lg-12 col-xl-12 taskTitle">
 							To do tasks
@@ -129,8 +136,8 @@ export function TaskList() {
 						})}
 
 						<div className="d-flex justify-content-start">
-							<div className="taskLeft">
-								{toDoList.length} task left
+							<div className="taskNum">
+								{toDoList.length} tasks left
 							</div>
 						</div>
 					</div>
@@ -154,16 +161,14 @@ export function TaskList() {
 							);
 						})}
 
-						<div className="d-flex justify-content-start mt-1">
-							<div className="taskLeft">
-								{taskDoneList.length} task done
+						<div className="d-flex justify-content-start">
+							<div className="taskNum">
+								{taskDoneList.length} tasks done
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-
-			{/* </div> */}
 		</div>
 	);
 }
