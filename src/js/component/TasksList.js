@@ -21,7 +21,10 @@ export function TaskList() {
 	function addNewTask(task) {
 		if (inputTask.trim() !== "") {
 			//'new Date()' para hacer el id único
-			setToDoList([...toDoList, { id: new Date(), text: task }]);
+			setToDoList([
+				...toDoList,
+				{ id: new Date(), text: task, done: false }
+			]);
 		}
 	}
 
@@ -62,22 +65,24 @@ export function TaskList() {
 	}
 
 	//Devolver la tarea a tareas pendientes
-	function dontDone(idTask) {
-		taskDoneList.filter(task => {
-			if (task.id === idTask) {
-				task.done = false;
+	function dontDone(idTask, done) {
+		if (done === true) {
+			taskDoneList.filter(task => {
+				if (task.id === idTask) {
+					task.done = false;
 
-				//Se mete en su lista de verdad, las no hechas
-				setToDoList([...toDoList, task]);
+					//Se mete en su lista de verdad, las no hechas
+					setToDoList([...toDoList, task]);
 
-				//Sacar la tarea que al final no se hizo de taskDoneList
-				let indexTask = toDoList.indexOf(task);
-				taskDoneList.splice(indexTask, 1);
+					//Sacar la tarea que al final no se hizo de taskDoneList
+					let indexTask = toDoList.indexOf(task);
+					taskDoneList.splice(indexTask, 1);
 
-				//Actualizar la lista de tareas hechas
-				setTaskDoneList(taskDoneList);
-			}
-		});
+					//Actualizar la lista de tareas hechas
+					setTaskDoneList(taskDoneList);
+				}
+			});
+		}
 	}
 
 	return (

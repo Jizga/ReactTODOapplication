@@ -42,7 +42,9 @@ export function Task(props) {
 
 							<i
 								className="fas fa-times fa-lg"
-								onClick={() => props.dontDone(props.id)}></i>
+								onClick={() =>
+									props.dontDone(props.id, props.done)
+								}></i>
 						</div>
 						<hr></hr>
 					</div>
